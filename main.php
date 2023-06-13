@@ -2,11 +2,15 @@
 /*
 Plugin Name: Login or Logout Menu Item
 Description: Adds a new Menu item which dynamically changes from login to logout depending on the current users logged in status.
-Version: 1.2.2
-Plugin URI: https://caseproof.com
+Version: 1.2.3
+Plugin URI: https://caseproof.com/
 Author: cartpauj
 Text Domain: lolmi
 Domain Path: /i18n
+*/
+
+/*
+Thanks goes to Juliobox for his work on the BAW Login/Logout Menu plugin on which this is based
 */
 
 /*
@@ -18,13 +22,10 @@ Domain Path: /i18n
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
-  Thanks goes to Juliobox for his work on the beginning of this via the BAW Login/Logout Menu plugin.
 */
 
 if(!defined('ABSPATH')) { die("Hey yo, why you cheatin?"); }
 
-/* Load up the language */
 function lolmi_load_textdomain() {
   $path = basename(dirname(__FILE__)) . '/i18n';
 
@@ -32,13 +33,11 @@ function lolmi_load_textdomain() {
 }
 add_action('plugins_loaded', 'lolmi_load_textdomain');
 
-/* Add a metabox in admin menu page */
 function lolmi_add_nav_menu_metabox() {
   add_meta_box('lolmi', __('Login/Logout', 'lolmi'), 'lolmi_nav_menu_metabox', 'nav-menus', 'side', 'default');
 }
 add_action('admin_head-nav-menus.php', 'lolmi_add_nav_menu_metabox');
 
-/* The metabox code : Awesome code stolen from screenfeed.fr (GregLone) Thank you mate. */
 function lolmi_nav_menu_metabox($object) {
   global $nav_menu_selected_id;
 
@@ -90,7 +89,6 @@ function lolmi_nav_menu_metabox($object) {
   <?php
 }
 
-/* Modify the "type_label" */
 function lolmi_nav_menu_type_label($menu_item) {
   $elems = array('#lolmilogin#', '#lolmilogout#', '#lolmiloginout#');
   if(isset($menu_item->object, $menu_item->url) && 'custom' == $menu_item->object && in_array($menu_item->url, $elems)) {
@@ -101,7 +99,6 @@ function lolmi_nav_menu_type_label($menu_item) {
 }
 add_filter('wp_setup_nav_menu_item', 'lolmi_nav_menu_type_label');
 
-/* Used to return the correct title for the double login/logout menu item */
 function lolmi_loginout_title($title) {
 	$titles = explode('|', $title);
 
@@ -112,7 +109,6 @@ function lolmi_loginout_title($title) {
 	}
 }
 
-/* The main code, this replace the #keyword# by the correct links with nonce ect */
 function lolmi_setup_nav_menu_item($item) {
 	global $pagenow;
 
@@ -138,12 +134,11 @@ function lolmi_setup_nav_menu_item($item) {
 add_filter('wp_setup_nav_menu_item', 'lolmi_setup_nav_menu_item');
 
 function lolmi_login_redirect_override($redirect_to, $request, $user) {
-  //If the login failed, or if the user is an Admin - let's not override the login redirect
   if(!is_a($user, 'WP_User') || user_can($user, 'manage_options')) {
     return $redirect_to;
   }
 
-  $login_redirect_url = get_option('lolmi_login_redirect_url', home_url());
+  $login_redirect_url = get_option('lolmi_login_redirect_url', $redirect_to);
   return $login_redirect_url;
 }
 add_filter('login_redirect', 'lolmi_login_redirect_override', 11, 3);
@@ -158,7 +153,7 @@ function lolmi_settings_page() {
       <h2><?php _e('Login or Logout Menu Item - Settings', 'lolmi'); ?></h2>
       <div class="lolmi_spacer" style="height:25px;"></div>
 
-      <?php if(isset($_GET['lolmisaved'])): ?>
+      <?php if(isset($_GET['menu-saved'])): ?>
         <div id="message" class="updated notice notice-success is-dismissible below-h2">
           <p><?php _e('Settings saved.', 'lolmi'); ?></p>
         </div>
@@ -166,47 +161,46 @@ function lolmi_settings_page() {
       <?php endif; ?>
 
       <form action="" method="post">
-        <label for="lolmi_login_page_url"><?php _e('Login Page URL', 'lolmi'); ?></label><br/>
+        <label for="login_page_url"><?php _e('Login Page URL', 'lolmi'); ?></label><br/>
         <small><?php _e('URL where your login page is found.'); ?></small><br/>
-        <input type="text" id="lolmi_login_page_url" name="lolmi_login_page_url" value="<?php echo $login_page_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
+        <input type="text" id="login_page_url" name="login_page_url" value="<?php echo $login_page_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
 
-        <label for="lolmi_login_redirect_url"><?php _e('Login Redirect URL', 'lolmi'); ?></label><br/>
+        <label for="login_redirect_url"><?php _e('Login Redirect URL', 'lolmi'); ?></label><br/>
         <small><?php _e('URL to redirect a user to after logging in. Note: Some other plugins may override this URL.'); ?></small><br/>
-        <input type="text" id="lolmi_login_redirect_url" name="lolmi_login_redirect_url" value="<?php echo $login_redirect_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
+        <input type="text" id="login_redirect_url" name="login_redirect_url" value="<?php echo $login_redirect_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
 
-        <label for="lolmi_logout_redirect_url"><?php _e('Logout Redirect URL', 'lolmi'); ?></label><br/>
+        <label for="logout_redirect_url"><?php _e('Logout Redirect URL', 'lolmi'); ?></label><br/>
         <small><?php _e('URL to redirect a user to after logging out. Note: Some other plugins may override this URL.'); ?></small><br/>
-        <input type="text" id="lolmi_logout_redirect_url" name="lolmi_logout_redirect_url" value="<?php echo $logout_redirect_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
+        <input type="text" id="logout_redirect_url" name="logout_redirect_url" value="<?php echo $logout_redirect_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
 
-        <?php wp_nonce_field('lolmi_nonce'); ?>
-        <input type="submit" id="lolmi_settings_submit" name="lolmi_settings_submit" value="<?php _e('Save Settings', 'lolmi'); ?>" class="button button-primary" />
+        <?php wp_nonce_field('the_nonce'); ?>
+        <input type="submit" id="settings_submit" name="settings_submit" value="<?php _e('Save Settings', 'lolmi'); ?>" class="button button-primary" />
       </form>
     </div>
   <?php
 }
 
 function lolmi_setup_menus() {
-  add_options_page('LOLMI Settings', 'Login or Logout', 'manage_options', 'lolmi-settings', 'lolmi_settings_page');
+  add_options_page('Login/Logout Settings', 'Login or Logout', 'manage_options', 'login-logout-settings', 'lolmi_settings_page');
 }
 add_action('admin_menu', 'lolmi_setup_menus');
 
 function lolmi_save_settings() {
-  if(isset($_POST['lolmi_settings_submit'])) {
-    if(!current_user_can('manage_options')) { die("Cheating eh?"); }
-    check_admin_referer('lolmi_nonce');
+  if(!isset($_GET['page']) || $_GET['page'] != 'login-logout-settings') { return; }
 
-    $login_page_url       = (isset($_POST['lolmi_login_page_url']) && !empty($_POST['lolmi_login_page_url'])) ? $_POST['lolmi_login_page_url'] : wp_login_url();
-    $login_redirect_url   = (isset($_POST['lolmi_login_redirect_url']) && !empty($_POST['lolmi_login_redirect_url'])) ? $_POST['lolmi_login_redirect_url'] : home_url();
-    $logout_redirect_url  = (isset($_POST['lolmi_logout_redirect_url']) && !empty($_POST['lolmi_logout_redirect_url'])) ? $_POST['lolmi_logout_redirect_url'] : home_url();
+  if(isset($_POST['settings_submit'])) {
+    if(!current_user_can('manage_options')) { die("Cheating eh?"); }
+    if(!check_admin_referer('the_nonce')) { die("Invalid Submission, try again."); }
+
+    $login_page_url       = (isset($_POST['login_page_url']) && !empty($_POST['login_page_url'])) ? $_POST['login_page_url'] : wp_login_url();
+    $login_redirect_url   = (isset($_POST['login_redirect_url']) && !empty($_POST['login_redirect_url'])) ? $_POST['login_redirect_url'] : home_url();
+    $logout_redirect_url  = (isset($_POST['logout_redirect_url']) && !empty($_POST['logout_redirect_url'])) ? $_POST['logout_redirect_url'] : home_url();
 
     update_option('lolmi_login_page_url', esc_url_raw($login_page_url));
     update_option('lolmi_login_redirect_url', esc_url_raw($login_redirect_url));
     update_option('lolmi_logout_redirect_url', esc_url_raw($logout_redirect_url));
 
-    // This is causing security issues with SiteGround - so we'll do it a different way.
-    // wp_redirect($_SERVER['REQUEST_URI']."&lolmisaved=true");
-    // die();
-    $_GET['lolmisaved'] = true;
+    $_GET['menu-saved'] = true;
   }
 }
 add_action('admin_init', 'lolmi_save_settings');

@@ -1,9 +1,9 @@
 === Login or Logout Menu Item ===
 Contributors: cartpauj
 Tags: login, log in, logout, log out, menu, menu item, menus, dynamic
-Requires at least: 3.0
-Tested up to: 6.1
-Stable tag: 1.2.2
+Requires at least: 5.0
+Tested up to: 6.2
+Stable tag: 1.2.3
 
 Add a dynamic "Login" or "Logout" menu item to any WordPress Menu and control redirects.
 
@@ -13,7 +13,7 @@ With this plugin you can easily add a dynamic login/logout menu item to any menu
 
 [How to use?](https://wordpress.org/support/topic/instructions-to-use-please/#post-9679222)
 
-Thanks to Juliobox for his prior efforts on the BAW Login/Logout Menu plugin!
+Thanks to Juliobox for his prior efforts on the BAW Login/Logout Menu plugin which this is derived from
 
 == Installation ==
 
@@ -29,6 +29,10 @@ Thanks to Juliobox for his prior efforts on the BAW Login/Logout Menu plugin!
 2. Login or Logout Menu Item - Settings
 
 == Changelog ==
+
+= 1.2.3 =
+* Small tweaks to help avoid hosting blocks
+* Fix nonce validation
 
 = 1.2.2 =
 * Bump WP Compatibility
