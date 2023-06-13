@@ -162,15 +162,15 @@ function lolmi_settings_page() {
 
       <form action="" method="post">
         <label for="login_page_url"><?php _e('Login Page URL', 'lolmi'); ?></label><br/>
-        <small><?php _e('URL where your login page is found.'); ?></small><br/>
+        <small><?php _e('URL where your login page is found.', 'lolmi'); ?></small><br/>
         <input type="text" id="login_page_url" name="login_page_url" value="<?php echo $login_page_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
 
         <label for="login_redirect_url"><?php _e('Login Redirect URL', 'lolmi'); ?></label><br/>
-        <small><?php _e('URL to redirect a user to after logging in. Note: Some other plugins may override this URL.'); ?></small><br/>
+        <small><?php _e('URL to redirect a user to after logging in. Note: Some other plugins may override this URL.', 'lolmi'); ?></small><br/>
         <input type="text" id="login_redirect_url" name="login_redirect_url" value="<?php echo $login_redirect_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
 
         <label for="logout_redirect_url"><?php _e('Logout Redirect URL', 'lolmi'); ?></label><br/>
-        <small><?php _e('URL to redirect a user to after logging out. Note: Some other plugins may override this URL.'); ?></small><br/>
+        <small><?php _e('URL to redirect a user to after logging out. Note: Some other plugins may override this URL.', 'lolmi'); ?></small><br/>
         <input type="text" id="logout_redirect_url" name="logout_redirect_url" value="<?php echo $logout_redirect_url; ?>" style="min-width:250px;width:60%;" /><br/><br/>
 
         <?php wp_nonce_field('the_nonce'); ?>

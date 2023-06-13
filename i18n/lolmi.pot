@@ -1,61 +1,91 @@
-#, fuzzy
+# Copyright (C) 2023 cartpauj
+# This file is distributed under the same license as the Login or Logout Menu Item plugin.
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: Login or Logout Menu Item\n"
-"POT-Creation-Date: 2017-10-19 17:48-0600\n"
-"PO-Revision-Date: 2017-10-19 17:48-0600\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: Login or Logout Menu Item 1.2.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/login-or-logout-menu-item\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: main.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
+"POT-Creation-Date: 2023-06-13T03:33:17+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: lolmi\n"
 
-#: main.php:38
-msgid "Login/Logout"
-msgstr ""
-
-#: main.php:47 main.php:49
-msgid "Log In"
-msgstr ""
-
-#: main.php:48 main.php:49
-msgid "Log Out"
-msgstr ""
-
-#: main.php:86
-msgid "Add to Menu"
-msgstr ""
-
-#: main.php:98
-msgid "Dynamic Link"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
+#. Plugin Name of the plugin
 msgid "Login or Logout Menu Item"
 msgstr ""
 
-#. Plugin URI of the plugin/theme
-#. Author URI of the plugin/theme
-msgid "https://caseproof.com"
+#. Plugin URI of the plugin
+msgid "https://caseproof.com/"
 msgstr ""
 
-#. Description of the plugin/theme
-msgid ""
-"Adds a new Menu item which dynamically changes from login to logout "
-"depending on the current users logged in status."
+#. Description of the plugin
+msgid "Adds a new Menu item which dynamically changes from login to logout depending on the current users logged in status."
 msgstr ""
 
-#. Author of the plugin/theme
+#. Author of the plugin
 msgid "cartpauj"
+msgstr ""
+
+#: main.php:37
+msgid "Login/Logout"
+msgstr ""
+
+#: main.php:45
+#: main.php:47
+#: main.php:106
+msgid "Log In"
+msgstr ""
+
+#: main.php:46
+#: main.php:47
+#: main.php:108
+msgid "Log Out"
+msgstr ""
+
+#: main.php:84
+msgid "Add to Menu"
+msgstr ""
+
+#: main.php:95
+msgid "Dynamic Link"
+msgstr ""
+
+#: main.php:153
+msgid "Login or Logout Menu Item - Settings"
+msgstr ""
+
+#: main.php:158
+msgid "Settings saved."
+msgstr ""
+
+#: main.php:164
+msgid "Login Page URL"
+msgstr ""
+
+#: main.php:165
+msgid "URL where your login page is found."
+msgstr ""
+
+#: main.php:168
+msgid "Login Redirect URL"
+msgstr ""
+
+#: main.php:169
+msgid "URL to redirect a user to after logging in. Note: Some other plugins may override this URL."
+msgstr ""
+
+#: main.php:172
+msgid "Logout Redirect URL"
+msgstr ""
+
+#: main.php:173
+msgid "URL to redirect a user to after logging out. Note: Some other plugins may override this URL."
+msgstr ""
+
+#: main.php:177
+msgid "Save Settings"
 msgstr ""
