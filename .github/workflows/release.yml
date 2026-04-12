@@ -39,7 +39,7 @@ jobs:
         if: steps.check.outputs.exists == 'false'
         run: |
           mkdir -p build/login-or-logout-menu-item
-          rsync -a --exclude='.git' --exclude='.github' --exclude='.wordpress-org' --exclude='build' --exclude='.gitignore' ./ build/login-or-logout-menu-item/
+          rsync -a --exclude-from='.distignore' --exclude='build' ./ build/login-or-logout-menu-item/
           cd build
           zip -r login-or-logout-menu-item.zip login-or-logout-menu-item/
 
