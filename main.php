@@ -2,7 +2,7 @@
 /*
 Plugin Name: Login or Logout Menu Item
 Description: Adds a new Menu item which dynamically changes from login to logout depending on the current users logged in status.
-Version: 1.3.0
+Version: 1.3.1
 Plugin URI: https://caseproof.com/
 Author: cartpauj
 Text Domain: login-or-logout-menu-item
